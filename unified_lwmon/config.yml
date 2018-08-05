@@ -1,0 +1,17 @@
+lwmon:
+  enabled: true
+  port: 8080
+
+  ui:
+    enabled: true
+    theme: 'default'
+    prefix: '/dashboard/'
+
+  rigs:
+    - name: 'local'
+      address: 'http://127.0.0.1:2443'
+      adapter: 'auto'
+
+    - name: 'test'
+      address: ''
+      adapter: 'auto'
