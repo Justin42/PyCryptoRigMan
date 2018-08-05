@@ -1,7 +1,6 @@
 from flask import Flask
 from .api import Rig, RigMonitor
 from .views import RigsView
-import yaml
 
 app = Flask(__name__)
 
@@ -14,6 +13,7 @@ def home():
 @app.route('/refresh')
 def refresh():
     return ''
+
 
 if __name__ == '__main__':
     rigMon = RigMonitor()

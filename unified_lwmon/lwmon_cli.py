@@ -32,13 +32,13 @@ class LWMonCLI(object):
         else:
             print('5. Enable alarm')
 
-
     def parse(self, command):
         print(command)
 
     def run(self):
         while self._running_:
             continue
+
 
 if __name__ == '__main__':
     cli = LWMonCLI('./config.yml')

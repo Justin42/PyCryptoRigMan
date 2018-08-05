@@ -1,13 +1,4 @@
-from enum import Enum
-import urllib, json
-
-
-class AdapterType(Enum):
-    SRB_MINER = 0
-    XMR_STAK = 1
-    XMR_RIG = 2
-    CAST_XMR = 3
-    RIGMAN_PROXY = 4
+import requests
 
 
 class BaseAdapter(object):
@@ -22,7 +13,7 @@ class BaseAdapter(object):
     def get_parsed(self):
         return self.data_parsed
 
-    def parse(self):
+    def _parse_(self):
         return NotImplementedError("API adapter seems invalid. BaseAdapter.parse not implemented.")
 
     def refresh(self):
@@ -34,4 +25,5 @@ class BaseJsonAdapter(BaseAdapter):
         super().__init__(config)
 
     def refresh(self):
-        return
+        self.data_raw = requests.get(self.config['address'])
+        self._parse_()
