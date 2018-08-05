@@ -1,15 +1,19 @@
 lwmon:
-  enabled: true
-  port: 8080
-
-  ui:
+  httpd:
     enabled: true
-    theme: 'default'
-    prefix: '/dashboard/'
+    port: 8080
+
+    web-ui:
+      enabled: true
+      theme: 'default'
+      prefix: '/dashboard/'
+
+  cli:
+    hashrate-alarm: true
 
   rigs:
     - name: 'local'
-      address: 'http://127.0.0.1:2443'
+      address: 'http://127.0.0.1:3333'
       adapter: 'auto'
 
     - name: 'test'

@@ -1,5 +1,6 @@
 from flask import Flask
-from .api import RigsView
+from .api import Rig, RigMonitor
+from .views import RigsView
 import yaml
 
 app = Flask(__name__)
@@ -15,5 +16,7 @@ def refresh():
     return ''
 
 if __name__ == '__main__':
+    rigMon = RigMonitor()
+
     RigsView.register(app, route_prefix='/api/')
     app.run()
