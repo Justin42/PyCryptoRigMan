@@ -12,9 +12,9 @@ class Rig(object):
         adapter_type = AdapterType.__getattr__(self.config['adapter'])
         self.adapter = AdapterFactory.create(adapter_type, self.config)
 
-    def refresh(self):
-
-        return
+        # Function wrappers
+        self.hashrate = self.adapter.get_hashrate
+        self.refresh = self.adapter.refresh
 
 
 class RigMonitor(object):

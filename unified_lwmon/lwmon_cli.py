@@ -32,7 +32,7 @@ class LWMonCLI(object):
         else:
             print('5. Enable alarm')
 
-    def parse(self, command):
+    def parse(self, command: str):
         print(command)
 
     def run(self):

@@ -12,7 +12,7 @@ class AdapterType(Enum):
     XMR_STAK = 2
     XMR_RIG = 3
     CAST_XMR = 4
-    RIGMAN_PROXY = 5
+    LWMON_API = 5
 
 
 class AdapterFactory(object):

@@ -11,6 +11,8 @@ lwmon:
   cli:
     hashrate-alarm: true
 
+  poll-rate: 15
+
   rigs:
     - name: 'local'
       address: 'http://127.0.0.1:3333'

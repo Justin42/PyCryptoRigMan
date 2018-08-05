@@ -1,7 +1,8 @@
+from abc import ABC, ABCMeta, abstractmethod
 import requests
 
 
-class BaseAdapter(object):
+class BaseAdapter(ABC):
     def __init__(self, config):
         self.config = config
         self.data_raw = dict()
@@ -10,20 +11,25 @@ class BaseAdapter(object):
     def get_raw(self):
         return self.data_raw
 
-    def get_parsed(self):
-        return self.data_parsed
+    #def get_parsed(self):
+    #    return self.data_parsed
 
-    def _parse_(self):
-        return NotImplementedError("API adapter seems invalid. BaseAdapter.parse not implemented.")
+    #def _parse_(self):
+    #    return NotImplementedError("API adapter seems invalid. 'parse' not implemented.")
 
+    @abstractmethod
     def refresh(self):
-        return NotImplementedError("API adapter seems invalid. BaseAdapter.refresh not implemented.")
+        return NotImplementedError("API adapter seems invalid. 'refresh' not implemented.")
+
+    @abstractmethod
+    def get_hashrate(self) -> int:
+        NotImplementedError("API adapter seems invalid. 'get_hashrate' not implemented.")
+        return 0
 
 
-class BaseJsonAdapter(BaseAdapter):
+class BaseJsonAdapter(BaseAdapter, ABC):
     def __init__(self, config):
         super().__init__(config)
 
     def refresh(self):
-        self.data_raw = requests.get(self.config['address'])
-        self._parse_()
+        self.data_raw = requests.get(self.config['address']).json()

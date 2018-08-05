@@ -16,7 +16,6 @@ def refresh():
 
 
 if __name__ == '__main__':
-    rigMon = RigMonitor()
-
+    RigsView.monitor = RigMonitor()
     RigsView.register(app, route_prefix='/api/')
     app.run()
