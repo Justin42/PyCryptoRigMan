@@ -1,6 +1,7 @@
-from flask import Flask
-from .api import Rig, RigMonitor
+from flask import Flask, current_app
 from .views import RigsView
+from .api import Rig, RigMonitor
+import yaml
 
 app = Flask(__name__)
 
@@ -10,12 +11,14 @@ def home():
     return 'Unified Lightweight Monitor'
 
 
-@app.route('/refresh')
-def refresh():
-    return ''
-
+with app.app_context():
+    current_app.lwmon = dict()
+    monitor = RigMonitor()
+    with open('unified_lwmon/config.yml') as file:
+        config = yaml.safe_load(file)
+    monitor.load_config(config)
+    current_app.lwmon['monitor'] = monitor
+RigsView.register(app)
 
 if __name__ == '__main__':
-    RigsView.monitor = RigMonitor()
-    RigsView.register(app, route_prefix='/api/')
     app.run()

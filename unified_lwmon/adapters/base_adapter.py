@@ -31,3 +31,4 @@ class BaseJsonAdapter(BaseAdapter, ABC):
     def refresh(self):
         print("Refreshing stats for rig '{0}'".format(self.config['name']))
         self.data_raw = requests.get(self.config['address']).json()
+        print(self.data_raw)

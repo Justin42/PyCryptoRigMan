@@ -12,18 +12,12 @@ class LWMonCLI(object):
             print('Reading configuration from: ' + config_file)
             with open(config_file) as file:
                 self.config = yaml.safe_load(file)
-                self._setup_rigs_()
+                self.monitor.load_config(self.config)
 
             print('Configuration loaded.')
 
         self._running_ = True
         return
-
-    def _setup_rigs_(self):
-        rigs = self.config['lwmon']['rigs']
-        for rig_conf in rigs:
-            rig = Rig(rig_conf)
-            self.monitor.add_rig(rig)
 
     def print_menu(self):
         print('1. Add rig \n2. Show hashrates \n3. Show results \n4. Dump stats')
