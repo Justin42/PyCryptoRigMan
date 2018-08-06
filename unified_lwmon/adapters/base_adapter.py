@@ -28,8 +28,6 @@ class BaseAdapter(ABC):
 
 
 class BaseJsonAdapter(BaseAdapter, ABC):
-    def __init__(self, config):
-        super().__init__(config)
-
     def refresh(self):
+        print("Refreshing stats for rig '{0}'".format(self.config['name']))
         self.data_raw = requests.get(self.config['address']).json()

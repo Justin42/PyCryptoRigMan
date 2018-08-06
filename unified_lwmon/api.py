@@ -9,7 +9,7 @@ class Rig(object):
     def __init__(self, config):
         self.data = dict()
         self.config = config
-        adapter_type = AdapterType.__getattr__(self.config['adapter'])
+        adapter_type = AdapterType.__getattr__(str(self.config['adapter']).upper())
         self.adapter = AdapterFactory.create(adapter_type, self.config)
 
         # Function wrappers
@@ -27,3 +27,9 @@ class RigMonitor(object):
     def refresh(self):
         for rig in self.rigs:
             rig.refresh()
+
+    def hashrate(self) -> int:
+        hashrate = 0
+        for rig in self.rigs:
+            hashrate += rig.hashrate()
+        return hashrate

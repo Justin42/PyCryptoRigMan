@@ -1,23 +1,33 @@
 lwmon:
+  # Options specific to httpd, only active for REST API
   httpd:
     enabled: true
     port: 8080
 
+    # Show web frontend at prefix directory. Requires httpd to be enabled.
     web-ui:
       enabled: true
       theme: 'default'
       prefix: '/dashboard/'
 
+  # Options specific to LWMonCLI
   cli:
     hashrate-alarm: true
+    auto-update: true
 
+  # Polling rate for monitor, in seconds.
+  # When monitor is disabled this still behaves as an external API call rate limit.
   poll-rate: 15
 
   rigs:
     - name: 'local'
-      address: 'http://127.0.0.1:3333'
+      address: 'http://127.0.0.1:3333/api.json'
       adapter: 'auto'
 
-    - name: 'test'
-      address: ''
+    - name: 'worker2-cpu'
+      address: 'http://192.168.50.54:3333/api.json'
       adapter: 'auto'
+
+    #- name: 'test'
+    #  address: ''
+    #  adapter: 'auto'
