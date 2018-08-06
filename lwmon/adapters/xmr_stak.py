@@ -6,4 +6,6 @@ class XmrStakAdapter(BaseJsonAdapter):
         return self.data_raw['hashrate']['total'][0]
 
     def get_extras(self) -> dict:
-        return dict()
+        extras = dict()
+        extras['version'] = self.data_raw['version']
+        return extras
