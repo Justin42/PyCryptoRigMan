@@ -8,13 +8,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'Unified Lightweight Monitor'
+    return 'Universal Lightweight Monitor'
 
 
 with app.app_context():
     current_app.lwmon = dict()
     monitor = RigMonitor()
-    with open('unified_lwmon/config.yml') as file:
+    with open('lwmon/config.yml') as file:
         config = yaml.safe_load(file)
     monitor.load_config(config)
     current_app.lwmon['monitor'] = monitor

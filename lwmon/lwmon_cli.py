@@ -1,4 +1,4 @@
-from unified_lwmon.api import RigMonitor, Rig
+from lwmon.api import RigMonitor, Rig
 import yaml
 
 
