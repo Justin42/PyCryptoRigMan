@@ -25,10 +25,12 @@ lwmon:
       adapter: 'XMR_STAK'
 
     - name: 'worker2'
+      alias: 'GPU'
       address: 'http://192.168.50.54:21555'
       adapter: 'SRB_MINER'
 
     - name: 'worker2'
+      alias: 'CPU'
       address: 'http://192.168.50.54:3333/api.json'
       adapter: 'XMR_STAK'
 

@@ -15,9 +15,11 @@ class Rig(object):
         self.adapter.refresh()
         self.stats = {
             'name': self.config['name'],
+            'alias': self.config.get('alias'),
             'address': self.config['address'],
             'adapter': self.config['adapter'],
             'hashrate': self.adapter.get_hashrate(),
+            'extras': self.adapter.get_extras()
         }
 
     def __str__(self):

@@ -11,12 +11,6 @@ class BaseAdapter(ABC):
     def get_raw(self):
         return self.data_raw
 
-    #def get_parsed(self):
-    #    return self.data_parsed
-
-    #def _parse_(self):
-    #    return NotImplementedError("API adapter seems invalid. 'parse' not implemented.")
-
     @abstractmethod
     def refresh(self):
         return NotImplementedError("API adapter seems invalid. 'refresh' not implemented.")
@@ -25,6 +19,10 @@ class BaseAdapter(ABC):
     def get_hashrate(self) -> int:
         NotImplementedError("API adapter seems invalid. 'get_hashrate' not implemented.")
         return 0
+
+    @abstractmethod
+    def get_extras(self) -> dict:
+        return dict()
 
 
 class BaseJsonAdapter(BaseAdapter, ABC):

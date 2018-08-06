@@ -7,3 +7,8 @@ class SrbMinerAdapter(BaseJsonAdapter):
         for device in self.data_raw['devices']:
             total_hashrate += device['hashrate']
         return total_hashrate
+
+    def get_extras(self) -> dict:
+        extras = dict()
+        extras['devices'] = self.data_raw['devices']
+        return extras
