@@ -4,6 +4,7 @@ from .api import Rig, RigMonitor
 import yaml
 
 app = Flask(__name__)
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 
 @app.route('/')
