@@ -1,6 +1,4 @@
-from flask import Flask, jsonify
-from flask_classy import FlaskView
-import yaml
+from flask import json
 
 from .adapters.adapter_factory import AdapterFactory, AdapterType
 
@@ -25,7 +23,7 @@ class Rig(object):
         }
 
     def __str__(self):
-        return str(jsonify(self.stats))
+        return self.stats
 
 
 class RigMonitor(object):
@@ -46,10 +44,10 @@ class RigMonitor(object):
         stats['rigs'] = []
         stats['hashrate'] = 0
         for rig in self.rigs:
-            print(rig.stats)
             rig.update_stats()
             stats['rigs'].append(rig.stats)
             stats['hashrate'] += rig.stats['hashrate']
+        self.stats = stats
 
     def load_config(self, config: dict):
         self.config = config
@@ -58,4 +56,3 @@ class RigMonitor(object):
         for rig_conf in rigs:
             rig = Rig(rig_conf)
             self.add_rig(rig)
-            print(rig)
