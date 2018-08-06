@@ -1,5 +1,3 @@
-from flask import json
-
 from .adapters.adapter_factory import AdapterFactory, AdapterType
 
 

@@ -1,5 +1,4 @@
 from enum import Enum
-import requests
 
 # Adapter imports
 from .base_adapter import BaseAdapter
