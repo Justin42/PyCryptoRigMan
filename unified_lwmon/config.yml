@@ -22,11 +22,16 @@ lwmon:
   rigs:
     - name: 'local'
       address: 'http://127.0.0.1:3333/api.json'
-      adapter: 'auto'
+      adapter: 'XMR_STAK'
 
-    - name: 'worker2-cpu'
+    - name: 'worker2'
+      address: 'http://192.168.50.54:21555'
+      adapter: 'SRB_MINER'
+
+    - name: 'worker2'
       address: 'http://192.168.50.54:3333/api.json'
-      adapter: 'auto'
+      adapter: 'XMR_STAK'
+
 
     #- name: 'test'
     #  address: ''

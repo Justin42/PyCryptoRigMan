@@ -41,9 +41,15 @@ class LWMonCLI(object):
     def print_hashrate(self, refresh=True):
         if refresh:
             self.monitor.refresh()
+        hashrates = dict()
         for rig in self.monitor.rigs:
+            # Combine hashrates for rigs with same name
             name = rig.config['name']
-            print('Rig \'{0}\': {1}H/s'.format(name, rig.hashrate()))
+            if name not in hashrates.keys():
+                hashrates[name] = 0
+            hashrates[name] += rig.hashrate()
+        for name in hashrates.keys():
+            print("Rig '{0}': {1}H/s".format(name, hashrates[name]))
         print('Total: {0}H/s'.format(self.monitor.hashrate()))
 
     def parse(self, command: str):

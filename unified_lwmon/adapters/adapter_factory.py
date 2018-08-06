@@ -4,6 +4,7 @@ import requests
 # Adapter imports
 from .base_adapter import BaseAdapter
 from .xmr_stak import XmrStakAdapter
+from .srbminer import SrbMinerAdapter
 
 
 class AdapterType(Enum):
@@ -17,7 +18,7 @@ class AdapterType(Enum):
 
 class AdapterFactory(object):
     typeClasses = {
-        AdapterType.SRB_MINER:      None,
+        AdapterType.SRB_MINER:      SrbMinerAdapter,
         AdapterType.XMR_STAK:       XmrStakAdapter,
         AdapterType.XMR_RIG:        None,
         AdapterType.CAST_XMR:       None,
