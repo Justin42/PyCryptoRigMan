@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, current_app
 from flask_classy import FlaskView
-from lwmon.api import RigMonitor
 
 
 class RigsView(FlaskView):
