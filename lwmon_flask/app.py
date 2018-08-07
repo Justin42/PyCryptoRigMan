@@ -1,6 +1,6 @@
 from flask import Flask, current_app
-from .views import RigsView
-from .api import Rig, RigMonitor
+from lwmon_flask.views import RigsView
+from lwmon.api import RigMonitor
 import yaml
 
 app = Flask(__name__)
