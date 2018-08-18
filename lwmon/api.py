@@ -1,4 +1,6 @@
 from .adapters.adapter_factory import AdapterFactory, AdapterType
+from .exchanges.exchange import *
+from abc import ABC, abstractmethod
 
 
 class Rig(object):
@@ -11,7 +13,7 @@ class Rig(object):
         # Function wrappers
         self.stats = dict()
 
-    def update_stats(self):
+    def update(self):
         self.adapter.refresh()
         self.stats = {
             'name': self.config['name'],
@@ -26,7 +28,17 @@ class Rig(object):
         return self.stats
 
 
-class RigMonitor(object):
+class Monitor(ABC):
+    @abstractmethod
+    def update(self):
+        pass
+
+    @abstractmethod
+    def load_config(self, config: dict):
+        pass
+
+
+class RigMonitor(Monitor):
     def __init__(self, config=None):
         if config is None:
             self.config = dict()
@@ -39,12 +51,12 @@ class RigMonitor(object):
         print("Added rig '{0}'".format(rig.config['name']))
         self.rigs.append(rig)
 
-    def update_stats(self):
+    def update(self):
         stats = dict()
         stats['rigs'] = []
         stats['hashrate'] = 0
         for rig in self.rigs:
-            rig.update_stats()
+            rig.update()
             stats['rigs'].append(rig.stats)
             stats['hashrate'] += rig.stats['hashrate']
         self.stats = stats
@@ -56,3 +68,22 @@ class RigMonitor(object):
         for rig_conf in rigs:
             rig = Rig(rig_conf)
             self.add_rig(rig)
+
+
+class PriceMonitor(Monitor):
+    def __init__(self, config=None):
+        self.exchanges = []
+        if config is None:
+            self.config = dict()
+        else:
+            self.config = config
+
+    def add_exchange(self, exchange: Exchange):
+        self.exchanges.append(exchange)
+
+    def load_config(self, config: dict):
+        pass
+
+    def update(self):
+        for exchange in self.exchanges:
+            exchange.update()
